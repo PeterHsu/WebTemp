@@ -3,11 +3,11 @@ import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 
 @Component({
-  selector: 'app-portal',
-  templateUrl: './portal.component.html',
-  styleUrls: ['./portal.component.scss']
+  selector: 'app-hero',
+  templateUrl: './hero.component.html',
+  styleUrls: ['./hero.component.scss']
 })
-export class PortalComponent implements OnInit {
+export class HeroComponent implements OnInit {
   heroes: Hero[];
   selectedHero: Hero;
   constructor(private heroService : HeroService) { }
@@ -29,5 +29,4 @@ export class PortalComponent implements OnInit {
           if (this.selectedHero === hero) { this.selectedHero = null; }
         });
   }
-
 }
