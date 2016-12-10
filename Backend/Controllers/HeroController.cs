@@ -33,7 +33,21 @@ namespace Backend.Controllers
 
             return await _context.Hero.ToListAsync();
         }
-                // DELETE api/values/5
+
+        // POST api/values
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody]Hero hero)
+        {
+           if (hero == null)
+            {
+                return BadRequest();
+            }
+            _context.Hero.Add(hero);
+            await _context.SaveChangesAsync();
+            return Json(hero);
+        }
+
+        // DELETE api/values/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -41,13 +55,13 @@ namespace Backend.Controllers
             {
                 return NotFound();
             }
-
             var hero = await _context.Hero.SingleOrDefaultAsync(m => m.id == id);
             if (hero == null)
             {
                 return NotFound();
             }
-
+            _context.Hero.Remove(hero);
+            await _context.SaveChangesAsync();
             return new NoContentResult();
         }
     }

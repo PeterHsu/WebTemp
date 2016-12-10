@@ -23,6 +23,13 @@ export class HeroService {
       .then(() => null)
       .catch(this.handleError);
   }
+  create(hero: Hero): Promise<Hero> {
+    return this.http
+      .post(this.valueUrl, JSON.stringify(hero), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json())
+      .catch(this.handleError);
+  }
 
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);
