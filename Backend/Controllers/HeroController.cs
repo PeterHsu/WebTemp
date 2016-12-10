@@ -33,5 +33,22 @@ namespace Backend.Controllers
 
             return await _context.Hero.ToListAsync();
         }
+                // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var hero = await _context.Hero.SingleOrDefaultAsync(m => m.id == id);
+            if (hero == null)
+            {
+                return NotFound();
+            }
+
+            return new NoContentResult();
+        }
     }
 }
