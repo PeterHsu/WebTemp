@@ -19,7 +19,7 @@ namespace Backend.Controllers
         }
         // GET api/values
         [HttpGet]
-        public async Task<IEnumerable<Hero>> Get()
+        public async Task<ActionResult> Get()
         {
             if(_context.Hero.Count() == 0)
             {
@@ -30,8 +30,7 @@ namespace Backend.Controllers
                 _context.Hero.Add(new Hero(){id=5,name="e"});
                 _context.SaveChanges();
             }
-
-            return await _context.Hero.ToListAsync();
+            return Ok(await _context.Hero.ToListAsync());
         }
 
         // POST api/values
@@ -44,7 +43,8 @@ namespace Backend.Controllers
             }
             _context.Hero.Add(hero);
             await _context.SaveChangesAsync();
-            return Json(hero);
+            //return Ok(CreatedAtRoute("get", new { id = hero.id }));
+            return Ok(hero);
         }
 
         // DELETE api/values/5
