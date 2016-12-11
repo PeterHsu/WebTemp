@@ -32,6 +32,22 @@ namespace Backend.Controllers
             }
             return Ok(await _context.Hero.ToListAsync());
         }
+        // GET api/values/5
+        [HttpGet("{id}",Name="Get")]
+        public async Task<IActionResult> Get(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var hero = await _context.Hero.SingleOrDefaultAsync(m => m.id == id);
+            if (hero == null)
+            {
+                return NotFound();
+            }
+            return Ok(hero);
+        }
 
         // POST api/values
         [HttpPost]
@@ -41,10 +57,15 @@ namespace Backend.Controllers
             {
                 return BadRequest();
             }
-            _context.Hero.Add(hero);
-            await _context.SaveChangesAsync();
-            //return Ok(CreatedAtRoute("get", new { id = hero.id }));
-            return Ok(hero);
+            try{
+                _context.Hero.Add(hero);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+            return CreatedAtRoute("Get",new {id=hero.id},hero);
         }
 
         // DELETE api/values/5
@@ -62,7 +83,7 @@ namespace Backend.Controllers
             }
             _context.Hero.Remove(hero);
             await _context.SaveChangesAsync();
-            return new NoContentResult();
+            return NoContent();
         }
     }
 }

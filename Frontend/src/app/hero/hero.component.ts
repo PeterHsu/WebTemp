@@ -27,8 +27,8 @@ export class HeroComponent implements OnInit {
     this.heroService.create({id:id,name:name})
       .then(hero => {
         this.heroes.push(hero);
-        //this.selectedHero = null;
-      });
+      })
+      .catch(this.handleError);
   }
   delete(hero: Hero): void {
     this.heroService
@@ -40,5 +40,8 @@ export class HeroComponent implements OnInit {
   }
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
+  }
+  private handleError(error: any): void {
+    console.log(error.message || error);
   }
 }
