@@ -38,4 +38,7 @@ export class HeroComponent implements OnInit {
           if (this.selectedHero === hero) { this.selectedHero = null; }
         });
   }
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+  }
 }

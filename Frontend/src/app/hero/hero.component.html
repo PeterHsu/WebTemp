@@ -1,3 +1,4 @@
+<div class="container">
 <h2>My Heroes</h2>
 <div>
   <label>Hero id:</label> <input #heroId />
@@ -6,12 +7,12 @@
     Add
   </button>
 </div>
-<ul class="heroes">
-  <li *ngFor="let hero of heroes" (click)="onSelect(hero)"
-      [class.selected]="hero === selectedHero">
-    <span class="badge">{{hero.id}}</span>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let hero of heroes" (click)="onSelect(hero)"
+      [class.list-group-item-action]="hero !== selectedHero" [class.active]="hero === selectedHero">
+    <span class="tag tag-default">{{hero.id}}</span>
     <span>{{hero.name}}</span>
-    <button class="delete"
+    <button class="float-xs-right"
       (click)="delete(hero); $event.stopPropagation()">x</button>
   </li>
 </ul>
@@ -20,4 +21,5 @@
     {{selectedHero.name | uppercase}} is my hero
   </h2>
   <button (click)="gotoDetail()">View Details</button>
+</div>
 </div>
