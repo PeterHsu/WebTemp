@@ -7,11 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { PortalComponent } from './portal/portal.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PortalComponent
+    PortalComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
